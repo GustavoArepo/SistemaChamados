@@ -1,0 +1,11 @@
+# ASP.NET
+**/bin/
+**/obj/
+*.user
+*.vs/
+.vscode/
+**/appsettings.Development.json
+launchSettings.json
+*.suo
+*.userosscache
+*.sln.docstates
