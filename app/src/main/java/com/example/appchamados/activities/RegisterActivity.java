@@ -1,4 +1,4 @@
-package activities;
+package com.example.appchamados.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

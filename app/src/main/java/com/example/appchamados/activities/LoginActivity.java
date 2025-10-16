@@ -1,4 +1,4 @@
-package activities;
+package com.example.appchamados.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity{
             Toast.makeText(this, "Email ou senha incorretos", Toast.LENGTH_SHORT).show();
         }
 
+
     }
 
     private boolean isValidPassword(String password) {
@@ -81,7 +82,6 @@ public class LoginActivity extends AppCompatActivity{
         // Por enquanto, vamos usar credenciais fixas para teste
         return email.equals("user@example.com") && password.equals("12345678");
     }
-
 
 }
 

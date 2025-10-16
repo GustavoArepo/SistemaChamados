@@ -1,9 +1,9 @@
 package com.example.appchamados.models;
 
-public class PerfilResponse {
+public class LoginResponse {
     private boolean success;
     private String message;
-    private UsuarioPerfil perfil;
+    private User user;
 
     // Getters e Setters
     public boolean isSuccess() { return success; }
@@ -12,17 +12,14 @@ public class PerfilResponse {
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 
-    public UsuarioPerfil getPerfil() { return perfil; }
-    public void setPerfil(UsuarioPerfil perfil) { this.perfil = perfil; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-    public static class UsuarioPerfil {
+    public static class User {
         private int id;
         private String nome;
         private String email;
         private String dataCadastro;
-        private int totalChamados;
-        private int chamadosAbertos;
-        private int chamadosResolvidos;
 
         // Getters e Setters
         public int getId() { return id; }
@@ -36,14 +33,5 @@ public class PerfilResponse {
 
         public String getDataCadastro() { return dataCadastro; }
         public void setDataCadastro(String dataCadastro) { this.dataCadastro = dataCadastro; }
-
-        public int getTotalChamados() { return totalChamados; }
-        public void setTotalChamados(int totalChamados) { this.totalChamados = totalChamados; }
-
-        public int getChamadosAbertos() { return chamadosAbertos; }
-        public void setChamadosAbertos(int chamadosAbertos) { this.chamadosAbertos = chamadosAbertos; }
-
-        public int getChamadosResolvidos() { return chamadosResolvidos; }
-        public void setChamadosResolvidos(int chamadosResolvidos) { this.chamadosResolvidos = chamadosResolvidos; }
     }
 }
