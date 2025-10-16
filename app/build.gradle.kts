@@ -57,7 +57,7 @@ dependencies {
 // Gson para JSON
     implementation("com.google.code.gson:gson:2.10.1")
 // Loading animation
-    implementation("com.github.ybq:Android-SpinKit:1.4.0")
+    //implementation("com.github.ybq:Android-SpinKit:1.4.0")
 
 
 }

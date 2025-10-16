@@ -1,4 +1,4 @@
-package activities;
+package com.example.appchamados.activities;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
