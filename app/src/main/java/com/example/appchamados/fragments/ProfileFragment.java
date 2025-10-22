@@ -1,6 +1,7 @@
 package com.example.appchamados.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class ProfileFragment extends Fragment {
     private ProgressBar progressBar;
 
     // TODO: Substituir pelo ID real do usuário logado
-    private int usuarioId = 1; // Temporário - depois vamos pegar do login
+    private int usuarioId = 5; // Temporário - depois vamos pegar do login
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -76,7 +77,7 @@ public class ProfileFragment extends Fragment {
 
     private void carregarPerfil() {
         showLoading(true);
-
+        Log.d("PERFIL", "Buscando perfil do usuário ID: " + usuarioId);
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         Call<PerfilResponse> call = apiService.getPerfil(usuarioId);
 
