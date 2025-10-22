@@ -28,6 +28,8 @@
         </activity>
         <activity android:name=".activities.MainActivity"/>
         <activity android:name=".activities.RegisterActivity"/>
+        <activity android:name=".activities.CriarChamadoActivity" />
+        <activity android:name=".activities.EditarChamadoActivity" />
     </application>
 
 </manifest>
