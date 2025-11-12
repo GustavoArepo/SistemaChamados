@@ -15,6 +15,7 @@ import com.example.appchamados.models.RegisterResponse;
 import com.example.appchamados.network.ApiClient;
 import com.example.appchamados.network.ApiService;
 import com.google.android.material.textfield.TextInputEditText;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -122,6 +123,8 @@ public class CriarChamadoActivity extends AppCompatActivity {
         btnSalvar.setEnabled(!show);
         btnSalvar.setText(show ? "Criando..." : "Criar Chamado");
     }
+
+    // Método temporário para ver o token
 
     @Override
     public boolean onSupportNavigateUp() {

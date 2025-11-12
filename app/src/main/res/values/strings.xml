@@ -1,5 +1,43 @@
 <resources>
-    <string name="app_name">AppChamados</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- STRINGS OBRIGATÓRIAS -->
+    <string name="app_name">App Chamados</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- STRINGS PARA A TELA DE DETALHES -->
+    <string name="status_alterado">Status alterado</string>
+    <string name="atualizar_status">Atualizar Status</string>
+    <string name="detalhes_chamado">Detalhes do Chamado</string>
+    <string name="historico">Histórico</string>
+    <string name="sem_historico">Sistema de histórico em desenvolvimento</string>
+
+    <!-- ARRAY PARA O SPINNER -->
+    <string-array name="status_array">
+        <item>Aberto</item>
+        <item>Em Andamento</item>
+        <item>Resolvido</item>
+    </string-array>
+
+    <!-- STRINGS DE MENU/NAVEGAÇÃO -->
+    <string name="menu_home">Home</string>
+    <string name="menu_chat">Chat</string>
+    <string name="menu_tickets">Chamados</string>
+    <string name="menu_profile">Perfil</string>
+
+    <!-- STRINGS PARA LOGIN/REGISTRO -->
+    <string name="action_login">Login</string>
+    <string name="action_register">Registrar</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Senha</string>
+    <string name="hint_name">Nome</string>
+
+    <!-- STRINGS PARA PERFIL -->
+    <string name="salvar_alteracoes">Salvar Alterações</string>
+    <string name="sair">Sair</string>
+
+    <!-- STRINGS PARA CHAMADOS -->
+    <string name="novo_chamado">Novo Chamado</string>
+    <string name="titulo_chamado">Título</string>
+    <string name="descricao_chamado">Descrição</string>
+    <string name="criar_chamado">Criar Chamado</string>
+    <string name="editar_chamado">Editar Chamado</string>
 </resources>

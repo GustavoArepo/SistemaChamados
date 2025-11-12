@@ -1,68 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <!-- Lista de Chamados -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewChamados"
+    <!-- ✅ ADICIONAR SWIPE REFRESH LAYOUT -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"
-        android:clipToPadding="false" />
+        android:layout_height="match_parent">
 
-    <!-- Loading -->
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <!-- Mensagem quando não há chamados -->
-    <LinearLayout
-        android:id="@+id/layoutEmpty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:visibility="gone"
-        android:padding="32dp">
+            <!-- ✅ BOTÕES DE FILTRO -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:background="@color/white">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/ic_tickets"
-            android:layout_marginBottom="16dp"
-            app:tint="#9E9E9E" />
+                <LinearLayout
+                    android:id="@+id/layoutFiltros"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nenhum chamado encontrado"
-            android:textSize="18sp"
-            android:textColor="#9E9E9E" />
+                    <!-- Filtro "Todos" -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFiltroTodos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="Todos"
+                        android:textSize="12sp"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        app:cornerRadius="16dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Clique no + para criar seu primeiro chamado"
-            android:textSize="14sp"
-            android:textColor="#9E9E9E"
-            android:layout_marginTop="8dp" />
+                    <!-- Filtro "Abertos" -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFiltroAbertos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="Abertos"
+                        android:textSize="12sp"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        app:cornerRadius="16dp" />
 
-    </LinearLayout>
+                    <!-- Filtro "Em Andamento" -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFiltroAndamento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="Em Andamento"
+                        android:textSize="12sp"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        app:cornerRadius="16dp" />
 
-    <!-- Botão Flutuante para Novo Chamado -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabNovoChamado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_add"
-        android:contentDescription="Novo Chamado" />
+                    <!-- Filtro "Resolvidos" -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFiltroResolvidos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Resolvidos"
+                        android:textSize="12sp"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        app:cornerRadius="16dp" />
 
-</RelativeLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- SEU CONTEÚDO ATUAL (RecyclerView, ProgressBar, etc) -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="16dp"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewChamados"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:visibility="visible"
+                />
+
+            <LinearLayout
+                android:id="@+id/layoutEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_tickets"
+                    app:tint="@color/gray_400" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nenhum chamado encontrado"
+                    android:textSize="16sp"
+                    android:layout_marginTop="16dp" />
+
+            </LinearLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabNovoChamado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_add"
+                app:tint="@color/white" />
+
+        </LinearLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>

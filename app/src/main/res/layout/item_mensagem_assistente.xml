@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="start"
+    android:paddingVertical="6dp"
+    android:paddingHorizontal="16dp">
+
+    <!-- Avatar do Assistente -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#EFF6FF"
+        android:layout_marginEnd="8dp"
+        android:layout_gravity="top">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_robot"
+            app:tint="#3B82F6" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Bubble da Mensagem -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="0dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="#E2E8F0">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvMensagem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Resposta do assistente de IA aqui"
+                android:textColor="#334155"
+                android:textSize="15sp"
+                android:lineSpacingExtra="3dp"
+                android:maxWidth="260dp" />
+
+            <TextView
+                android:id="@+id/tvHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14:32"
+                android:textSize="11sp"
+                android:textColor="#94A3B8"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

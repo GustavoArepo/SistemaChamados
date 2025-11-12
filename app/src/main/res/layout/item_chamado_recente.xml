@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#E2E8F0"
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- HEADER: Status Badge e Data -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
+
+            <!-- Status Badge -->
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ABERTO"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.08"
+                android:background="@drawable/bg_status_badge"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:textColor="#3B82F6"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Spacer -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!-- Data com ícone -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_calendar"
+                    app:tint="#94A3B8"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/tvData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="01/01/2024"
+                    android:textSize="12sp"
+                    android:textColor="#64748B" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- TÍTULO -->
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Título do Chamado"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#1E293B"
+            android:lineSpacingExtra="2dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginBottom="8dp" />
+
+        <!-- FOOTER: ID ou info adicional -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_ticket"
+                app:tint="#94A3B8"
+                android:layout_marginEnd="6dp" />
+
+            <TextView
+                android:id="@+id/tvIdChamado"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ID #12345"
+                android:textSize="11sp"
+                android:textColor="#94A3B8" />
+
+            <!-- Seta/Chevron -->
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="#CBD5E1" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

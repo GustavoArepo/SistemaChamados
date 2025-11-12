@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- CARD DE DETALHES PRINCIPAIS -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- TÍTULO -->
+                <TextView
+                    android:id="@+id/tvTitulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Título do Chamado"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- DESCRIÇÃO -->
+                <TextView
+                    android:id="@+id/tvDescricao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Descrição completa do chamado..."
+                    android:textSize="14sp"
+                    android:textColor="@color/gray_700"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- LINHA DE INFORMAÇÕES -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
+
+                    <!-- STATUS -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Status"
+                            android:textSize="12sp"
+                            android:textColor="@color/gray_500" />
+
+                        <TextView
+                            android:id="@+id/tvStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Aberto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:background="@drawable/bg_status_aberto"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="4dp"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <!-- DATA -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Data"
+                            android:textSize="12sp"
+                            android:textColor="@color/gray_500" />
+
+                        <TextView
+                            android:id="@+id/tvDataCriacao"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="01/01/2024"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- USUÁRIO -->
+                <TextView
+                    android:id="@+id/tvUsuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ID Usuário: 123"
+                    android:textSize="12sp"
+                    android:textColor="@color/gray_600" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView> <!-- ✅ FECHAMENTO CORRETO DO CARD DE DETALHES -->
+
+        <!-- CARD DO CHAT -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chat do Chamado"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <Button
+                    android:id="@+id/btnAbrirChat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Abrir Chat"
+                    android:drawableStart="@drawable/ic_chat"
+                    android:drawablePadding="8dp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD DE ALTERAR STATUS -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Alterar Status"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <Spinner
+                    android:id="@+id/spinnerStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp" />
+
+                <Button
+                    android:id="@+id/btnAlterarStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Atualizar Status"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD DE IMAGENS DO CHAMADO -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardImagens"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Imagens do Chamado"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- BOTÃO PARA ADICIONAR IMAGEM -->
+                <Button
+                    android:id="@+id/btnAdicionarImagem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Adicionar Imagem"
+                    android:drawableStart="@drawable/ic_add_photo"
+                    android:drawablePadding="8dp"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- RECYCLERVIEW DAS IMAGENS -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvImagens"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <!-- LAYOUT QUANDO NÃO HÁ IMAGENS -->
+                <LinearLayout
+                    android:id="@+id/layoutSemImagens"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="24dp"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_photo"
+                        android:layout_marginBottom="8dp"
+                        app:tint="@color/gray_400" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nenhuma imagem adicionada"
+                        android:textSize="14sp"
+                        android:textColor="@color/gray_500"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD DE HISTÓRICO -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Histórico"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- ESTADO SEM HISTÓRICO -->
+                <LinearLayout
+                    android:id="@+id/layoutSemHistorico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="32dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_history"
+                        android:layout_marginBottom="8dp"
+                        app:tint="@color/gray_400" />
+
+                    <TextView
+                        android:id="@+id/tvMensagemHistorico"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sistema de histórico em desenvolvimento"
+                        android:textSize="14sp"
+                        android:textColor="@color/gray_500"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <!-- RECYCLERVIEW PARA HISTÓRICO (inicialmente invisível) -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHistorico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- LOADING -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="32dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>

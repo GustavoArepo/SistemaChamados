@@ -104,7 +104,11 @@ public class ChamadosAdapter extends RecyclerView.Adapter<ChamadosAdapter.Chamad
             tvStatus.setBackgroundResource(bgRes);
 
             // Cliques
-            itemView.setOnClickListener(v -> listener.onChamadoClick(chamado));
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onChamadoClick(chamado);
+                }
+            });
             btnEditar.setOnClickListener(v -> listener.onEditarClick(chamado));
             btnExcluir.setOnClickListener(v -> listener.onExcluirClick(chamado));
         }

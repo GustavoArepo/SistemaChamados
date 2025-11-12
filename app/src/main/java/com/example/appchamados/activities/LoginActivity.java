@@ -15,6 +15,7 @@ import com.example.appchamados.models.LoginResponse;
 import com.example.appchamados.network.ApiClient;
 import com.example.appchamados.network.ApiService;
 import com.example.appchamados.network.ConnectionTester;
+import com.example.appchamados.utils.SessionManager;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.OutputStream;
@@ -173,17 +174,23 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("LOGIN_MANUAL", "Message: " + loginResponse.getMessage());
 
                         if (loginResponse.isSuccess()) {
-                            Log.d("LOGIN_MANUAL", "✅ LOGIN MANUAL BEM-SUCEDIDO!");
-                            Log.d("LOGIN_MANUAL", "Usuário: " + loginResponse.getUser().getNome());
-                            Log.d("LOGIN_MANUAL", "ID: " + loginResponse.getUser().getId());
+                            // ✅ SALVAR SESSÃO COM TOKEN (MÉTODO ATUALIZADO)
+                            SessionManager session = new SessionManager(LoginActivity.this);
+                            session.createLoginSession(
+                                    loginResponse.getUser().getId(),
+                                    loginResponse.getUser().getNome(),
+                                    loginResponse.getUser().getEmail(),
+                                    loginResponse.getToken() // ✅ ADICIONE O TOKEN AQUI!
+                            );
 
-                            Toast.makeText(LoginActivity.this, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show();
+                            Log.d("LOGIN", "Sessão criada para: " + loginResponse.getUser().getNome());
+                            Log.d("LOGIN", "Token salvo: " + (loginResponse.getToken() != null ? loginResponse.getToken().substring(0, Math.min(10, loginResponse.getToken().length())) + "..." : "NULO"));
+                            Log.d("LOGIN", "User ID salvo: " + loginResponse.getUser().getId());
 
-                            // Navegar para MainActivity
+                            Toast.makeText(LoginActivity.this, "Login realizado!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
-
                         } else {
                             Log.e("LOGIN_MANUAL", "❌ Login falhou: " + loginResponse.getMessage());
                             Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();

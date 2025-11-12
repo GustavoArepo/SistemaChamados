@@ -7,9 +7,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.util.concurrent.TimeUnit;
 
 public class ApiClient {
-    // URL base da API - IMPORTANTE: ajuste conforme sua configuração
-    private static final String BASE_URL = "http://10.0.2.2:5257/"; // Para emulador Android
-    //private static final String BASE_URL = "http://192.168.15.9:5000/"; // Para dispositivo físico (substitua pelo IP do seu PC)
+    // ✅ URL BASE CORRIGIDA - com /api/ no final
+    private static final String BASE_URL = "http://10.0.2.2:5257/api/"; // Para emulador Android
+
+    //private static final String BASE_URL = "http://192.168.15.9:5000/api/"; // Para dispositivo físico
 
     private static Retrofit retrofit = null;
 
@@ -29,9 +30,9 @@ public class ApiClient {
 
             // Configurar Retrofit
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(BASE_URL) // ✅ Já inclui /api/
                     .client(client)
-                    .addConverterFactory(GsonConverterFactory.create()) // Converter JSON para objetos Java
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;

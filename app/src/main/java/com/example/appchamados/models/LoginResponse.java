@@ -3,6 +3,7 @@ package com.example.appchamados.models;
 public class LoginResponse {
     private boolean success;
     private String message;
+    private String token; // ✅ MOVER O TOKEN PARA AQUI (nível da classe principal)
     private User user;
 
     // Getters e Setters
@@ -11,6 +12,9 @@ public class LoginResponse {
 
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
+
+    public String getToken() { return token; } // ✅ GETTER DO TOKEN
+    public void setToken(String token) { this.token = token; }
 
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
@@ -33,5 +37,6 @@ public class LoginResponse {
 
         public String getDataCadastro() { return dataCadastro; }
         public void setDataCadastro(String dataCadastro) { this.dataCadastro = dataCadastro; }
+
     }
 }

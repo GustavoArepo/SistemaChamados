@@ -43,6 +43,15 @@
                 android:textSize="14sp"
                 android:textColor="@android:color/white" />
 
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sair"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#F44336"
+                android:layout_marginTop="16dp" />
+
         </LinearLayout>
 
         <!-- Estatísticas -->

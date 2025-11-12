@@ -1,5 +1,6 @@
 package com.example.appchamados.fragments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.example.appchamados.models.AtualizacaoPerfilRequest;
 import com.example.appchamados.models.PerfilResponse;
 import com.example.appchamados.network.ApiClient;
 import com.example.appchamados.network.ApiService;
+import com.example.appchamados.utils.SessionManager;
 import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
@@ -33,26 +35,32 @@ public class ProfileFragment extends Fragment {
     private ProgressBar progressBar;
 
     // TODO: Substituir pelo ID real do usuário logado
-    private int usuarioId = 5; // Temporário - depois vamos pegar do login
+    private int usuarioId; // Temporário - depois vamos pegar do login
 
-    public ProfileFragment() {
-        // Required empty public constructor
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // ✅ USAR SESSION MANAGER
+        SessionManager session = new SessionManager(requireContext());
+        usuarioId = session.getUserId();
+
+        if (usuarioId == -1) {
+            Toast.makeText(getContext(), "Usuário não logado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        initializeComponents();
+        setupClickListeners();
+        carregarPerfil();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProfile2Binding.inflate(inflater, container, false);
         return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        initializeComponents();
-        setupClickListeners();
-        carregarPerfil();
     }
 
     private void initializeComponents() {
@@ -73,6 +81,24 @@ public class ProfileFragment extends Fragment {
 
     private void setupClickListeners() {
         btnSalvar.setOnClickListener(v -> atualizarPerfil());
+        // ✅ BOTÃO DE LOGOUT
+        Button btnLogout = getView().findViewById(R.id.btnLogout);
+        if (btnLogout != null) {
+            btnLogout.setOnClickListener(v -> fazerLogout());
+        }
+    }
+
+    private void fazerLogout() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Sair")
+                .setMessage("Tem certeza que deseja sair?")
+                .setPositiveButton("Sim", (dialog, which) -> {
+                    SessionManager session = new SessionManager(requireContext());
+                    session.logoutUser();
+                    requireActivity().finish();
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 
     private void carregarPerfil() {

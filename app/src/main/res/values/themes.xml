@@ -1,9 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.AppChamados" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Tema base para a aplicação -->
+    <style name="Base.Theme.AppChamados" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Action Bar -->
+        <item name="actionBarStyle">@style/Theme.AppChamados.ActionBar</item>
     </style>
 
+    <!-- Tema principal da aplicação -->
     <style name="Theme.AppChamados" parent="Base.Theme.AppChamados" />
+
+    <!-- Tema sem Action Bar para ChatActivity -->
+    <style name="Theme.AppChamados.NoActionBar" parent="Theme.AppChamados">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Adicione no seu themes.xml -->
+    <style name="ShapeAppearanceOverlay.App.Corner" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Style para Action Bar -->
+    <style name="Theme.AppChamados.ActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="background">?attr/colorPrimary</item>
+        <item name="titleTextStyle">@style/Theme.AppChamados.ActionBar.Title</item>
+    </style>
+
+
+
+    <!-- Style para título da Action Bar -->
+    <style name="Theme.AppChamados.ActionBar.Title" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
 </resources>

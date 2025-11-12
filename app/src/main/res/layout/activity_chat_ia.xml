@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA">
+
+    <!-- APP BAR -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- ÍCONE E TÍTULO -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="2dp"
+                        app:cardBackgroundColor="#EFF6FF">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_robot"
+                            app:tint="#3B82F6" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Assistente IA"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#1E293B" />
+
+                        <TextView
+                            android:id="@+id/tvStatusIA"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="● Online"
+                            android:textSize="11sp"
+                            android:textColor="#10B981" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- BOTÃO VOLTAR -->
+                <ImageView
+                    android:id="@+id/btnVoltar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_close"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:tint="#64748B"
+                    android:contentDescription="Voltar" />
+            </LinearLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ÁREA DE CONVERSA -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvConversa"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:paddingBottom="16dp"
+                tools:listitem="@layout/item_mensagem_chat"
+                tools:itemCount="4" />
+
+            <!-- MENSAGEM DE BOAS-VINDAS (quando lista vazia) -->
+            <LinearLayout
+                android:id="@+id/layoutBoasVindas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="32dp"
+                android:visibility="visible"
+                tools:visibility="gone">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    app:cardCornerRadius="40dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#EFF6FF"
+                    android:layout_marginBottom="24dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_robot"
+                        app:tint="#3B82F6" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Olá! Sou seu assistente de TI"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#1E293B"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Como posso ajudar você hoje?"
+                    android:textSize="14sp"
+                    android:textColor="#64748B"
+                    android:gravity="center"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- SUGESTÕES RÁPIDAS -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Perguntas Sugeridas:"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#64748B"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.05"
+                    android:layout_marginBottom="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSugestao1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Como resetar minha senha?"
+                        app:chipIcon="@drawable/ic_help"
+                        app:chipBackgroundColor="@color/white"
+                        app:chipStrokeColor="#E2E8F0"
+                        app:chipStrokeWidth="1dp"
+                        android:layout_marginBottom="8dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSugestao2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Problemas com impressora"
+                        app:chipIcon="@drawable/ic_help"
+                        app:chipBackgroundColor="@color/white"
+                        app:chipStrokeColor="#E2E8F0"
+                        app:chipStrokeWidth="1dp"
+                        android:layout_marginBottom="8dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSugestao3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Como instalar software?"
+                        app:chipIcon="@drawable/ic_help"
+                        app:chipBackgroundColor="@color/white"
+                        app:chipStrokeColor="#E2E8F0"
+                        app:chipStrokeWidth="1dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- BARRA DE INPUT FIXA NO FUNDO -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:padding="16dp">
+
+        <!-- LOADING INDICATOR -->
+        <LinearLayout
+            android:id="@+id/layoutLoading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="@drawable/bg_loading_ia"
+            android:visibility="gone"
+            android:layout_marginBottom="12dp"
+            tools:visibility="visible">
+
+            <ProgressBar
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:indeterminateTint="#3B82F6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Assistente está digitando..."
+                android:textSize="13sp"
+                android:textColor="#64748B"
+                android:layout_marginStart="12dp" />
+        </LinearLayout>
+
+        <!-- INPUT DE TEXTO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_input_chat"
+            android:padding="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPergunta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Digite sua pergunta..."
+                android:textSize="15sp"
+                android:background="@android:color/transparent"
+                android:maxLines="4"
+                android:scrollbars="vertical"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:textColor="#1E293B"
+                android:textColorHint="#94A3B8" />
+
+            <!-- BOTÃO ENVIAR -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnEnviar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#3B82F6"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginStart="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_send"
+                    app:tint="@color/white" />
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- INFO TEXTO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Powered by Google Gemini AI"
+            android:textSize="10sp"
+            android:textColor="#94A3B8"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_sparkles"
+            android:drawablePadding="4dp"
+            android:drawableTint="#CBD5E1" />
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

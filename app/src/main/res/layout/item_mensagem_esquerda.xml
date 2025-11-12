@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="4dp">
+
+    <!-- MENSAGEM DO ATENDENTE (ESQUERDA) -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:background="@drawable/bg_mensagem_esquerda"
+        android:maxWidth="280dp">
+
+        <TextView
+            android:id="@+id/tvMensagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mensagem do atendente"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:30"
+            android:textColor="@color/gray_600"
+            android:textSize="10sp"
+            android:layout_gravity="start"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+
+    <!-- ESPAÇO FLEXÍVEL -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

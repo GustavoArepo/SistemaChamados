@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="120dp"
+    android:layout_height="140dp"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- IMAGEM -->
+        <ImageView
+            android:id="@+id/ivImagem"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_photo_placeholder"
+            android:background="@color/gray_200" />
+
+        <!-- NOME DO ARQUIVO -->
+        <TextView
+            android:id="@+id/tvNomeArquivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="imagem.jpg"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:ellipsize="middle"
+            android:padding="4dp"
+            android:background="@color/gray_100" />
+
+        <!-- BOTÃO DE DELETAR -->
+        <ImageButton
+            android:id="@+id/btnDeletarImagem"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="end"
+            android:background="@drawable/bg_btn_delete"
+            android:src="@drawable/ic_delete"
+            android:scaleType="centerInside"
+            android:layout_margin="4dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
