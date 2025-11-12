@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "127444091921",
+    "project_id": "appchamadospim2025",
+    "storage_bucket": "appchamadospim2025.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127444091921:android:5f72cc24746f3aa5ea5db0",
+        "android_client_info": {
+          "package_name": "com.example.appchamados"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUvoIwO1nLkwcvRXpbUmWPNb9DvihnIjg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
