@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.appchamados.R;
 import com.example.appchamados.activities.ChamadoDetailActivity;
 import com.example.appchamados.activities.CriarChamadoActivity;
@@ -36,6 +37,7 @@ public class HomeFragment extends Fragment implements ChamadosRecentesAdapter.On
     private SessionManager sessionManager;
     private ChamadosRecentesAdapter adapter;
     private List<Chamado> listaRecentes = new ArrayList<>();
+    private SwipeRefreshLayout swipeRefreshLayout; // ✅ NOVO
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class HomeFragment extends Fragment implements ChamadosRecentesAdapter.On
         setupUserInfo();
         setupRecyclerView();
         setupClickListeners();
+        setupPullToRefresh(); // ✅ NOVO
         carregarDadosDashboard();
     }
 
@@ -60,8 +63,6 @@ public class HomeFragment extends Fragment implements ChamadosRecentesAdapter.On
 
         binding.tvUserName.setText(userName.isEmpty() ? "Usuário" : userName);
         binding.tvWelcome.setText(userEmail.isEmpty() ? "Bem-vindo!" : "Bem-vindo de volta!");
-
-        // Esconder badge de notificações por enquanto
         binding.tvNotificationBadge.setVisibility(View.GONE);
     }
 
@@ -72,29 +73,41 @@ public class HomeFragment extends Fragment implements ChamadosRecentesAdapter.On
         binding.recyclerViewRecentes.setNestedScrollingEnabled(false);
     }
 
+    // ✅ NOVO: CONFIGURAR PULL-TO-REFRESH
+    private void setupPullToRefresh() {
+        swipeRefreshLayout = binding.swipeRefreshLayout;
+
+        // Configurar cores do loading
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.colorPrimary,
+                R.color.blue,
+                R.color.colorPrimaryDark
+        );
+
+        // Ação ao puxar para atualizar
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            carregarDadosDashboard();
+        });
+    }
+
     private void setupClickListeners() {
-        // NOVO CHAMADO
         binding.btnNovoChamado.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), CriarChamadoActivity.class);
             startActivity(intent);
         });
 
-        // VER TODOS OS CHAMADOS
         binding.btnVerTodos.setOnClickListener(v -> {
-            // Navegar para TicketsFragment
             if (getActivity() != null && getActivity() instanceof MainActivity) {
                 ((MainActivity) getActivity()).navigateToTickets();
             }
         });
 
-        // VER TODOS RECENTES
         binding.tvVerTodosRecentes.setOnClickListener(v -> {
             if (getActivity() != null && getActivity() instanceof MainActivity) {
                 ((MainActivity) getActivity()).navigateToTickets();
             }
         });
 
-        // CRIAR PRIMEIRO CHAMADO (quando lista vazia)
         binding.btnCriarPrimeiroChamado.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), CriarChamadoActivity.class);
             startActivity(intent);
@@ -104,6 +117,7 @@ public class HomeFragment extends Fragment implements ChamadosRecentesAdapter.On
     private void carregarDadosDashboard() {
         if (!sessionManager.isLoggedIn()) {
             Log.e("HOME_DEBUG", "Usuário não logado");
+            swipeRefreshLayout.setRefreshing(false); // ✅ PARAR LOADING
             return;
         }
 
@@ -116,18 +130,15 @@ public class HomeFragment extends Fragment implements ChamadosRecentesAdapter.On
         call.enqueue(new Callback<ChamadosResponse>() {
             @Override
             public void onResponse(Call<ChamadosResponse> call, Response<ChamadosResponse> response) {
+                swipeRefreshLayout.setRefreshing(false); // ✅ PARAR LOADING
+
                 if (response.isSuccessful() && response.body() != null) {
                     ChamadosResponse chamadosResponse = response.body();
 
                     if (chamadosResponse.isSuccess() && chamadosResponse.getChamados() != null) {
                         List<Chamado> todosChamados = chamadosResponse.getChamados();
-
-                        // ✅ ATUALIZAR ESTATÍSTICAS
                         atualizarEstatisticas(todosChamados);
-
-                        // ✅ ATUALIZAR LISTA RECENTES (últimos 3)
                         atualizarChamadosRecentes(todosChamados);
-
                     } else {
                         Log.e("HOME_DEBUG", "Erro na resposta da API");
                     }
@@ -138,6 +149,7 @@ public class HomeFragment extends Fragment implements ChamadosRecentesAdapter.On
 
             @Override
             public void onFailure(Call<ChamadosResponse> call, Throwable t) {
+                swipeRefreshLayout.setRefreshing(false); // ✅ PARAR LOADING
                 Log.e("HOME_DEBUG", "Erro de conexão: " + t.getMessage());
             }
         });
@@ -171,7 +183,6 @@ public class HomeFragment extends Fragment implements ChamadosRecentesAdapter.On
     }
 
     private void atualizarChamadosRecentes(List<Chamado> todosChamados) {
-        // Pegar últimos 3 chamados (ou menos)
         int limite = Math.min(todosChamados.size(), 3);
         listaRecentes.clear();
 
@@ -199,7 +210,6 @@ public class HomeFragment extends Fragment implements ChamadosRecentesAdapter.On
     public void onChamadoClick(Chamado chamado) {
         Log.d("HOME_DEBUG", "Navegando para detalhes do chamado: " + chamado.getId());
 
-        // ✅ VERIFICAÇÃO DE SEGURANÇA
         if (!isAdded() || getActivity() == null) {
             Log.e("HOME_DEBUG", "Fragment não está attached - abortando navegação");
             return;
@@ -223,7 +233,6 @@ public class HomeFragment extends Fragment implements ChamadosRecentesAdapter.On
     @Override
     public void onResume() {
         super.onResume();
-        // Recarregar dados quando o fragment for revisitado
         carregarDadosDashboard();
     }
 

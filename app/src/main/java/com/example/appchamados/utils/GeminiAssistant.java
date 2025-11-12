@@ -26,7 +26,7 @@ public class GeminiAssistant {
         this.context = context;
     }
 
-    // ✅ INTERFACE DE CALLBACK (mesma do HuggingFace)
+    // ✅ INTERFACE DE CALLBACK
     public interface AICallback {
         void onSuccess(String resposta);
         void onError(String erro);
@@ -95,7 +95,7 @@ public class GeminiAssistant {
                     String resposta = parseGeminiResponse(response.toString());
 
                     if (resposta != null && !resposta.isEmpty()) {
-                        Log.d(TAG, "✅ Resposta do Gemini: " + resposta.substring(0, Math.min(100, resposta.length())) + "...");
+                        Log.d(TAG, "✅ Resposta do Gemini recebida");
                         callback.onSuccess(resposta);
                     } else {
                         callback.onError("Resposta vazia do Gemini");
@@ -146,7 +146,7 @@ public class GeminiAssistant {
                 }
             }
 
-            Log.e(TAG, "Formato de resposta inesperado: " + jsonResponse);
+            Log.e(TAG, "Formato de resposta inesperado");
             return "Erro ao processar resposta do Gemini";
 
         } catch (Exception e) {
@@ -161,6 +161,5 @@ public class GeminiAssistant {
         Log.d(TAG, "API Key configurada: " + (API_KEY != null && !API_KEY.isEmpty()));
         Log.d(TAG, "Disponível: " + estaDisponivel());
         Log.d(TAG, "Modelo: " + getModeloAtual());
-        Log.d(TAG, "URL: " + API_URL);
     }
 }

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appchamados.R;
 import com.example.appchamados.adapters.ChatIAAdapter;
 import com.example.appchamados.models.MensagemIA;
-import com.example.appchamados.utils.GeminiAssistant; // ✅ MUDOU PARA GEMINI
+import com.example.appchamados.utils.GeminiAssistant;
 import com.google.android.material.chip.Chip;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.List;
 public class ChatIAFragment extends Fragment {
     private static final String TAG = "ChatIAFragment";
 
-    private GeminiAssistant assistente; // ✅ MUDOU PARA GEMINI
+    private GeminiAssistant assistente;
     private EditText etPergunta;
     private RecyclerView rvConversa;
     private View layoutBoasVindas, layoutLoading;
@@ -50,22 +50,18 @@ public class ChatIAFragment extends Fragment {
         layoutBoasVindas = view.findViewById(R.id.layoutBoasVindas);
         layoutLoading = view.findViewById(R.id.layoutLoading);
 
-        // ✅ CONFIGURAR RECYCLERVIEW
         adapter = new ChatIAAdapter(mensagens);
         rvConversa.setLayoutManager(new LinearLayoutManager(getContext()));
         rvConversa.setAdapter(adapter);
 
-        // ✅ BOTÃO ENVIAR
         view.findViewById(R.id.btnEnviar).setOnClickListener(v -> enviarPergunta());
 
-        // ✅ BOTÃO VOLTAR
         view.findViewById(R.id.btnVoltar).setOnClickListener(v -> {
             if (getActivity() != null) {
                 getActivity().onBackPressed();
             }
         });
 
-        // ✅ ENVIAR COM ENTER
         etPergunta.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == android.view.inputmethod.EditorInfo.IME_ACTION_SEND) {
                 enviarPergunta();
@@ -76,7 +72,7 @@ public class ChatIAFragment extends Fragment {
     }
 
     private void inicializarAssistente(View view) {
-        assistente = new GeminiAssistant(requireContext()); // ✅ INSTANCIA GEMINI
+        assistente = new GeminiAssistant(requireContext());
 
         TextView tvStatusIA = view.findViewById(R.id.tvStatusIA);
 
@@ -87,11 +83,8 @@ public class ChatIAFragment extends Fragment {
 
             adicionarMensagem("Sistema",
                     "🔑 **Gemini não configurado**\n\n" +
-                            "A API Key já está no código.\n" +
-                            "Se não funcionar, verifique:\n" +
-                            "1. Conexão com internet\n" +
-                            "2. API Key válida no código\n" +
-                            "3. Permissões de internet no manifest",
+                            "Configure a API Key em:\n" +
+                            "GeminiAssistant.java (linha 14)",
                     false);
         } else {
             String status = "🟢 " + assistente.getModeloAtual();
@@ -139,20 +132,16 @@ public class ChatIAFragment extends Fragment {
             return;
         }
 
-        // ✅ ESCONDER BOAS-VINDAS NA PRIMEIRA MENSAGEM
         if (layoutBoasVindas.getVisibility() == View.VISIBLE) {
             layoutBoasVindas.setVisibility(View.GONE);
             rvConversa.setVisibility(View.VISIBLE);
         }
 
-        // ✅ ADICIONAR MENSAGEM DO USUÁRIO
         adicionarMensagem("Você", pergunta, true);
         etPergunta.setText("");
 
-        // ✅ MOSTRAR LOADING
         layoutLoading.setVisibility(View.VISIBLE);
 
-        // ✅ FAZER PERGUNTA PARA GEMINI
         assistente.perguntar(pergunta, new GeminiAssistant.AICallback() {
             @Override
             public void onSuccess(String resposta) {
@@ -183,7 +172,6 @@ public class ChatIAFragment extends Fragment {
         mensagens.add(mensagem);
         adapter.notifyItemInserted(mensagens.size() - 1);
 
-        // ✅ ROLAR PARA A ÚLTIMA MENSAGEM
         rvConversa.postDelayed(() -> {
             rvConversa.smoothScrollToPosition(mensagens.size() - 1);
         }, 100);

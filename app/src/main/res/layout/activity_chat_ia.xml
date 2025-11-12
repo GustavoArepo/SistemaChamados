@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7FA">
+    android:background="@color/background">
 
-    <!-- APP BAR -->
+    <!-- HEADER -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:elevation="0dp">
+        android:background="@color/white"
+        app:elevation="2dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:paddingVertical="8dp"
+            android:background="@color/white"
+            android:paddingVertical="12dp"
             android:paddingHorizontal="16dp">
 
             <LinearLayout
@@ -28,7 +28,6 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
-                <!-- ÍCONE E TÍTULO -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -36,19 +35,20 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
+                    <!-- Avatar IA -->
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="#E8F5E9">
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/colorPrimaryLight">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_sparkles"
-                            app:tint="#4CAF50" />
+                            android:src="@drawable/ic_robot"
+                            app:tint="@color/colorPrimary" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
@@ -60,10 +60,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Gemini AI"
+                            android:text="Assistente IA"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="#1E293B" />
+                            android:textColor="@color/gray_900" />
 
                         <TextView
                             android:id="@+id/tvStatusIA"
@@ -71,11 +71,11 @@
                             android:layout_height="wrap_content"
                             android:text="● Online"
                             android:textSize="11sp"
-                            android:textColor="#10B981" />
+                            android:textColor="@color/green" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- BOTÃO VOLTAR -->
+                <!-- Botão Voltar -->
                 <ImageView
                     android:id="@+id/btnVoltar"
                     android:layout_width="40dp"
@@ -85,99 +85,97 @@
                     android:padding="8dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:tint="#64748B"
+                    app:tint="@color/gray_600"
                     android:contentDescription="Voltar" />
             </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- CONTEÚDO PRINCIPAL -->
-    <androidx.core.widget.NestedScrollView
+    <!-- ÁREA PRINCIPAL -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
+        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <!-- CONVERSA -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <!-- ÁREA DE CONVERSA -->
+            <!-- RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvConversa"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:paddingBottom="16dp"
-                tools:listitem="@layout/item_mensagem_chat"
-                tools:itemCount="4" />
+                android:paddingHorizontal="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-            <!-- MENSAGEM DE BOAS-VINDAS -->
-            <LinearLayout
+            <!-- Boas-vindas -->
+            <ScrollView
                 android:id="@+id/layoutBoasVindas"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="32dp"
+                android:layout_height="match_parent"
                 android:visibility="visible"
                 tools:visibility="gone">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    app:cardCornerRadius="40dp"
-                    app:cardElevation="0dp"
-                    app:cardBackgroundColor="#E8F5E9"
-                    android:layout_marginBottom="24dp">
-
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_sparkles"
-                        app:tint="#4CAF50" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Olá! Sou o Gemini"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="#1E293B"
-                    android:gravity="center"
-                    android:layout_marginBottom="8dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Assistente de IA do Google"
-                    android:textSize="14sp"
-                    android:textColor="#64748B"
-                    android:gravity="center"
-                    android:layout_marginBottom="24dp" />
-
-                <!-- SUGESTÕES RÁPIDAS -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Perguntas Sugeridas:"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="#64748B"
-                    android:textAllCaps="true"
-                    android:letterSpacing="0.05"
-                    android:layout_marginBottom="12dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:padding="32dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cardCornerRadius="40dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/colorPrimaryLight"
+                        android:layout_marginBottom="24dp">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_robot"
+                            app:tint="@color/colorPrimary" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Olá! Sou seu Assistente"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/gray_900"
+                        android:gravity="center"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Powered by Gemini 2.0"
+                        android:textSize="14sp"
+                        android:textColor="@color/gray_600"
+                        android:gravity="center"
+                        android:layout_marginBottom="24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Perguntas Sugeridas:"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/gray_600"
+                        android:textAllCaps="true"
+                        android:letterSpacing="0.05"
+                        android:layout_marginBottom="12dp" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipSugestao1"
@@ -186,8 +184,9 @@
                         android:text="Como resetar minha senha?"
                         app:chipIcon="@drawable/ic_help"
                         app:chipBackgroundColor="@color/white"
-                        app:chipStrokeColor="#E2E8F0"
+                        app:chipStrokeColor="@color/gray_300"
                         app:chipStrokeWidth="1dp"
+                        app:chipIconTint="@color/colorPrimary"
                         android:layout_marginBottom="8dp" />
 
                     <com.google.android.material.chip.Chip
@@ -197,8 +196,9 @@
                         android:text="Problemas com impressora"
                         app:chipIcon="@drawable/ic_help"
                         app:chipBackgroundColor="@color/white"
-                        app:chipStrokeColor="#E2E8F0"
+                        app:chipStrokeColor="@color/gray_300"
                         app:chipStrokeWidth="1dp"
+                        app:chipIconTint="@color/colorPrimary"
                         android:layout_marginBottom="8dp" />
 
                     <com.google.android.material.chip.Chip
@@ -208,108 +208,104 @@
                         android:text="Como instalar software?"
                         app:chipIcon="@drawable/ic_help"
                         app:chipBackgroundColor="@color/white"
-                        app:chipStrokeColor="#E2E8F0"
-                        app:chipStrokeWidth="1dp" />
+                        app:chipStrokeColor="@color/gray_300"
+                        app:chipStrokeWidth="1dp"
+                        app:chipIconTint="@color/colorPrimary" />
                 </LinearLayout>
-            </LinearLayout>
+            </ScrollView>
+        </FrameLayout>
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-    <!-- BARRA DE INPUT FIXA NO FUNDO -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical"
-        android:background="@color/white"
-        android:elevation="8dp"
-        android:padding="16dp">
-
-        <!-- LOADING INDICATOR -->
+        <!-- INPUT FIXO NO FUNDO -->
         <LinearLayout
-            android:id="@+id/layoutLoading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="12dp"
-            android:background="@drawable/bg_loading_ia"
-            android:visibility="gone"
-            android:layout_marginBottom="12dp"
-            tools:visibility="visible">
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:elevation="8dp"
+            android:padding="12dp">
 
-            <ProgressBar
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:indeterminateTint="#4CAF50" />
+            <!-- Loading -->
+            <LinearLayout
+                android:id="@+id/layoutLoading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:background="@drawable/bg_loading_ia"
+                android:visibility="gone"
+                android:layout_marginBottom="8dp">
 
+                <ProgressBar
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:indeterminateTint="@color/colorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Processando..."
+                    android:textSize="12sp"
+                    android:textColor="@color/gray_600"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <!-- Campo de texto -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_input_chat"
+                android:padding="4dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPergunta"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Digite sua pergunta..."
+                    android:textSize="14sp"
+                    android:background="@android:color/transparent"
+                    android:maxLines="3"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="8dp"
+                    android:textColor="@color/gray_900"
+                    android:textColorHint="@color/gray_500"
+                    android:imeOptions="actionSend"
+                    android:inputType="textMultiLine|textCapSentences" />
+
+                <!-- Botão Enviar -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnEnviar"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginStart="4dp">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_send"
+                        app:tint="@color/white" />
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Info -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Gemini está pensando..."
-                android:textSize="13sp"
-                android:textColor="#64748B"
-                android:layout_marginStart="12dp" />
+                android:text="Powered by Google Gemini 2.0"
+                android:textSize="9sp"
+                android:textColor="@color/gray_500"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp" />
         </LinearLayout>
-
-        <!-- INPUT DE TEXTO -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@drawable/bg_input_chat"
-            android:padding="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPergunta"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Digite sua pergunta..."
-                android:textSize="15sp"
-                android:background="@android:color/transparent"
-                android:maxLines="4"
-                android:scrollbars="vertical"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="8dp"
-                android:textColor="#1E293B"
-                android:textColorHint="#94A3B8" />
-
-            <!-- BOTÃO ENVIAR -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/btnEnviar"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="#4CAF50"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginStart="8dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_send"
-                    app:tint="@color/white" />
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-
-        <!-- INFO TEXTO -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Powered by Google Gemini 2.0 Flash"
-            android:textSize="10sp"
-            android:textColor="#94A3B8"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:drawableStart="@drawable/ic_sparkles"
-            android:drawablePadding="4dp"
-            android:drawableTint="#CBD5E1" />
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

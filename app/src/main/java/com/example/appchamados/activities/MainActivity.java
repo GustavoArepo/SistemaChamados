@@ -14,12 +14,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.appchamados.BuildConfig;
+
 import com.example.appchamados.fragments.ChatIAFragment;
 import com.example.appchamados.fragments.HomeFragment;
 import com.example.appchamados.fragments.TicketsFragment;
 import com.example.appchamados.fragments.ProfileFragment;
-import com.example.appchamados.utils.HuggingFaceAssistant;
 import com.example.appchamados.utils.SessionManager;
 import com.example.appchamados.R;
 import com.example.appchamados.databinding.ActivityMainBinding;
@@ -43,12 +42,11 @@ public class MainActivity extends AppCompatActivity {
         solicitarPermissaoNotificacoes();
         criarCanalNotificacao();
         verificarConfiguracoesIA(); // ✅ MUDOU NOME DO MÉTODO
-        verificarApiKey();
+
 
         Log.d("MAIN_DEBUG", "=== CONFIGURAÇÕES INICIAIS ===");
 
-        // ✅ TESTE DE CONFIGURAÇÃO HUGGING FACE
-        //testarHuggingFaceConfig();
+
     }
 
     private void setupBottomNavigation() {
@@ -163,44 +161,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // ✅ MÉTODO PARA TESTE RÁPIDO DO CHAT IA
-    public void testarChatIA() {
-        try {
-            // Teste rápido do assistente
-            com.example.appchamados.utils.HuggingFaceAssistant assistente =
-                    new com.example.appchamados.utils.HuggingFaceAssistant(this);
 
-            if (assistente.estaDisponivel()) {
-                Log.d("HF_TEST", "✅ Hugging Face: Disponível e funcionando");
-                Toast.makeText(this, "Assistente IA disponível", Toast.LENGTH_SHORT).show();
-            } else {
-                Log.w("HF_TEST", "⚠️ Hugging Face: Não disponível - Configure API Key");
-                Toast.makeText(this, "Configure a API Key do Hugging Face", Toast.LENGTH_LONG).show();
-            }
 
-        } catch (Exception e) {
-            Log.e("HF_TEST", "❌ Erro no teste: " + e.getMessage());
-            Toast.makeText(this, "Erro no assistente IA: " + e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    }
 
-    // ✅ MÉTODO PARA NAVEGAR PARA O CHAT IA (útil para testes)
-    public void navigateToChatIA() {
-        binding.bottomNavigation.setSelectedItemId(R.id.nav_chat);
-    }
-
-    private void verificarApiKey() {
-        Log.d("KEY_TEST", "=== VERIFICAÇÃO API KEY ===");
-
-        try {
-            // Testar HuggingFaceAssistant
-            HuggingFaceAssistant assistente = new HuggingFaceAssistant(this);
-            assistente.diagnostico();
-
-        } catch (Exception e) {
-            Log.e("KEY_TEST", "Erro: " + e.getMessage());
-        }
-    }
 
     @Override
     protected void onResume() {
