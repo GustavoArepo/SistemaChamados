@@ -8,6 +8,7 @@
         public string Senha { get; set; }
 
         public DateTime DataCadastro { get; set; }
+        public bool IsAdministrador { get; set; } = false;
 
     }
 
