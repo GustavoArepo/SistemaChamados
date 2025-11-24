@@ -14,12 +14,13 @@
         public string Categoria { get; set; } = "Geral";
         public string Responsavel { get; set; } = string.Empty;
     }
-}
-public class UsuarioAtualizacao
-{
-    public string Nome { get; set; }
-    public string Email { get; set; }
-    public string SenhaAtual { get; set; }
-    public string NovaSenha { get; set; }
+
+    public class UsuarioAtualizacao
+    {
+        public string Nome { get; set; }
+        public string Email { get; set; }
+        public string SenhaAtual { get; set; }
+        public string NovaSenha { get; set; }
+    }
 }
 

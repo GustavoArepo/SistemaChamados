@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ChamadosApi.Models;
-using ChamadosApi.Models.ChamadosApi.Models;
 
 namespace ChamadosApi.Data
 {
