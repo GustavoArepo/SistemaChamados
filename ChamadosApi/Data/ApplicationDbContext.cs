@@ -14,6 +14,7 @@ namespace ChamadosApi.Data
         public DbSet<Chamado> Chamados { get; set; }
         public DbSet<Mensagem> Mensagens { get; set; }
         public DbSet<ChamadoImagem> ChamadoImagens { get; set; }
+        public DbSet<Comentario> Comentarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,6 +34,12 @@ namespace ChamadosApi.Data
                 .WithMany()
                 .HasForeignKey(m => m.UsuarioId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Comentario>()
+                .HasOne(c => c.Chamado)
+                .WithMany()
+                .HasForeignKey(c => c.ChamadoId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
     }

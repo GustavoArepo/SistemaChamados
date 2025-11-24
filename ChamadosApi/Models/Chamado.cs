@@ -6,9 +6,13 @@
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public int UsuarioId { get; set; }
-        public string Status { get; set; }
-        public DateTime DataAbertura { get; set; }
+        public string Status { get; set; } = "Aberto";
+        public DateTime DataAbertura { get; set; } = DateTime.Now;
         public DateTime? DataFechamento { get; set; }
+        public string NumeroChamado { get; set; } = string.Empty;
+        public string Prioridade { get; set; } = "Média";
+        public string Categoria { get; set; } = "Geral";
+        public string Responsavel { get; set; } = string.Empty;
     }
 }
 public class UsuarioAtualizacao
