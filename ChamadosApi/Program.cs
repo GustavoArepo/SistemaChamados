@@ -19,24 +19,50 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// Add DbContext
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Add DbContext - Suporte para SQL Server ou MySQL
+var databaseProvider = builder.Configuration.GetValue<string>("DatabaseProvider") ?? "SqlServer";
 
-// Add CORS para permitir requests do Android
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    if (databaseProvider.Equals("MySql", StringComparison.OrdinalIgnoreCase))
+    {
+        var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
+        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    }
+    else
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    }
+});
+
+// Add CORS - Configuração dinâmica para desenvolvimento e produção
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
         policy =>
         {
-            policy.WithOrigins(
-                    "http://10.0.2.2",        // Emulador Android
-                    "http://localhost",       // Localhost
-                    "http://127.0.0.1"        // Localhost alternativo
-                )
-                .AllowAnyMethod()     // GET, POST, PUT, DELETE, etc.
-                .AllowAnyHeader()     // Qualquer header
-                .AllowCredentials();  // Permite credenciais
+            var allowedOrigins = builder.Configuration.GetSection("AppSettings:AllowedOrigins").Get<string[]>();
+
+            if (allowedOrigins != null && allowedOrigins.Length > 0)
+            {
+                // Produção: usa origens específicas
+                policy.WithOrigins(allowedOrigins)
+                      .AllowAnyMethod()
+                      .AllowAnyHeader()
+                      .AllowCredentials();
+            }
+            else
+            {
+                // Desenvolvimento: permite origens locais
+                policy.WithOrigins(
+                        "http://10.0.2.2",        // Emulador Android
+                        "http://localhost",       // Localhost
+                        "http://127.0.0.1"        // Localhost alternativo
+                    )
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            }
         });
 });
 
