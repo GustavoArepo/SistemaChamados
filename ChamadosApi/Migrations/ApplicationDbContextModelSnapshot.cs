@@ -30,6 +30,10 @@ namespace ChamadosApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DataAbertura")
                         .HasColumnType("datetime2");
 
@@ -37,6 +41,18 @@ namespace ChamadosApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumeroChamado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prioridade")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Responsavel")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -130,6 +146,38 @@ namespace ChamadosApi.Migrations
                     b.ToTable("Mensagens");
                 });
 
+            modelBuilder.Entity("ChamadosApi.Models.Comentario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Autor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ChamadoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("EhAdministrador")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Mensagem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChamadoId");
+
+                    b.ToTable("Comentarios");
+                });
+
             modelBuilder.Entity("ChamadosApi.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -144,6 +192,9 @@ namespace ChamadosApi.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsAdministrador")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -189,6 +240,17 @@ namespace ChamadosApi.Migrations
                     b.Navigation("Chamado");
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("ChamadosApi.Models.Comentario", b =>
+                {
+                    b.HasOne("ChamadosApi.Models.Chamado", "Chamado")
+                        .WithMany()
+                        .HasForeignKey("ChamadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chamado");
                 });
 #pragma warning restore 612, 618
         }

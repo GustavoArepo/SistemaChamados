@@ -6,9 +6,15 @@
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public int UsuarioId { get; set; }
-        public string Status { get; set; }
-        public DateTime DataAbertura { get; set; }
+        public string Status { get; set; } = "Aberto";
+        public DateTime DataAbertura { get; set; } = DateTime.Now;
         public DateTime? DataFechamento { get; set; }
+        
+        // CAMPOS ADICIONADOS para compatibilidade com sistema Web/Desktop do colega
+        public string NumeroChamado { get; set; } = string.Empty;
+        public string Prioridade { get; set; } = "Média"; // Baixa, Média, Alta
+        public string Categoria { get; set; } = "Geral"; // Hardware, Software, Rede, etc
+        public string Responsavel { get; set; } = string.Empty;
     }
 }
 public class UsuarioAtualizacao

@@ -6,9 +6,10 @@
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
-
         public DateTime DataCadastro { get; set; }
-
+        
+        // CAMPO ADICIONADO para compatibilidade com sistema Web/Desktop do colega
+        public bool IsAdministrador { get; set; } = false;
     }
 
     public class UsuarioLogin
