@@ -10,7 +10,7 @@ import com.example.appchamados.models.LoginRequest;
 import com.example.appchamados.models.LoginResponse;
 import com.example.appchamados.models.Mensagem;
 import com.example.appchamados.models.MensagemRequest;
-import com.example.appchamados.models.MensagemResponse; // ✅ CORRIGIDO
+import com.example.appchamados.models.MensagemResponse;
 import com.example.appchamados.models.MensagensResponse;
 import com.example.appchamados.models.RegisterRequest;
 import com.example.appchamados.models.RegisterResponse;
@@ -32,65 +32,76 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    // Autenticação
-    @POST("auth/login")
+    // ========================================
+    // AUTENTICAÇÃO
+    // ========================================
+    @POST("authapi/login")
     Call<LoginResponse> login(@Body LoginRequest request);
 
-    @POST("auth/register")
+    @POST("authapi/register")
     Call<RegisterResponse> register(@Body RegisterRequest request);
 
-    // Perfil
-    @GET("usuario/perfil/{usuarioId}")
+    // ========================================
+    // PERFIL
+    // ========================================
+    @GET("usuarioapi/perfil/{usuarioId}")
     Call<PerfilResponse> getPerfil(@Path("usuarioId") int usuarioId);
 
-    @PUT("usuario/perfil/{usuarioId}")
+    @PUT("usuarioapi/perfil/{usuarioId}")
     Call<RegisterResponse> atualizarPerfil(@Path("usuarioId") int usuarioId, @Body AtualizacaoPerfilRequest request);
 
-    // Chamados
-    @GET("chamados/usuario/{usuarioId}")
+    // ========================================
+    // CHAMADOS
+    // ========================================
+    @GET("chamadosapi/usuario/{usuarioId}")
     Call<ChamadosResponse> getChamadosPorUsuario(@Path("usuarioId") int usuarioId);
 
-    @POST("chamados")
+    @POST("chamadosapi")
     Call<RegisterResponse> criarChamado(@Body Chamado chamado);
 
-    @PUT("chamados/{chamadoId}")
+    @PUT("chamadosapi/{chamadoId}")
     Call<RegisterResponse> atualizarChamado(@Path("chamadoId") int chamadoId, @Body Chamado chamado);
 
-    @DELETE("chamados/{chamadoId}")
+    @DELETE("chamadosapi/{chamadoId}")
     Call<RegisterResponse> deletarChamado(@Path("chamadoId") int chamadoId);
 
-    @GET("chamados/{id}")
+    @GET("chamadosapi/{id}")
     Call<ChamadoDetailResponse> getChamadoDetail(@Path("id") int chamadoId);
 
-    // ✅ ENDPOINTS DE MENSAGENS CORRIGIDOS
-    @GET("mensagens/chamado/{chamadoId}")
+    // ========================================
+    // MENSAGENS
+    // ========================================
+    @GET("mensagensapi/chamado/{chamadoId}")
     Call<MensagensResponse> getMensagensPorChamado(@Path("chamadoId") int chamadoId);
 
-    @POST("mensagens")
-    Call<MensagemResponse> enviarMensagem(@Body MensagemRequest request); // ✅ CORRIGIDO: MensagemResponse
+    @POST("mensagensapi")
+    Call<MensagemResponse> enviarMensagem(@Body MensagemRequest request);
 
-    @PUT("mensagens/{id}/ler")
+    @PUT("mensagensapi/{id}/ler")
     Call<RegisterResponse> marcarMensagemComoLida(@Path("id") int mensagemId);
 
-    @GET("mensagens/chamado/{chamadoId}/nao-lidas")
+    @GET("mensagensapi/chamado/{chamadoId}/nao-lidas")
     Call<MensagensResponse> getMensagensNaoLidas(@Path("chamadoId") int chamadoId, @Query("usuarioId") int usuarioId);
 
-    /**
-     * ✅ ENVIAR TOKEN FCM PARA API
-     */
-    @POST("api/usuario/fcm-token")
+    // ========================================
+    // FCM TOKEN
+    // ========================================
+    @POST("usuarioapi/fcm-token")
     Call<RegisterResponse> salvarFCMToken(@Body FCMTokenRequest request);
 
+    // ========================================
+    // IMAGENS
+    // ========================================
     @Multipart
-    @POST("imagens/upload")
+    @POST("imagensapi/upload")
     Call<ImagemResponse> uploadImagem(
             @Part("chamadoId") RequestBody chamadoId,
             @Part MultipartBody.Part arquivo
     );
 
-    @GET("imagens/chamado/{chamadoId}")
+    @GET("imagensapi/chamado/{chamadoId}")
     Call<ImagensResponse> getImagensPorChamado(@Path("chamadoId") int chamadoId);
 
-    @DELETE("imagens/{id}")
+    @DELETE("imagensapi/{id}")
     Call<RegisterResponse> deleteImagem(@Path("id") int imagemId);
 }
